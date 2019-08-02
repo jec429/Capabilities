@@ -12,7 +12,6 @@ application = Flask(__name__)
 application.url_map.converters['list'] = ListConverter
 
 
-
 @application.route('/')
 def home():
     return render_template('index.html')
@@ -62,12 +61,15 @@ def cap_search(argus):
                   (all_docs[capa4] >= cap4) &
                   (all_docs[capa5] >= cap5)]
 
+    print(df.shape[0])
+
     if df.shape[0] == 0:
         return "<html><body><h1>Keyword not found!</h1><h1><button onclick='goBack()'>Go Back</button><script>function \
         goBack() {window.history.back();}</script></h1></body></html>"
     else:
-        write_html(df)
-        return render_template('key_results.html')
+        string = write_table(df)
+        # return render_template('key_results.html')
+        return string
 
 
 @application.route('/result/<int:name>')

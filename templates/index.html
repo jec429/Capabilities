@@ -68,7 +68,7 @@ clear: both;
 
 <img src="../static/JohnsonandJohnsonLogo.png" alt="J&J Logo" width="500" height="100">
 
-<form action = "http://localhost:5000/search" method = "post">
+<form action = "{{ url_for('search') }}" method = "post">
 
         <h2 style="font-family:verdana; font-size:160%;">Filters:</h2>
         <div class="column">

@@ -89,7 +89,7 @@ window.history.back();
     string += "<h1>Top " + str(df.shape[0]) + " results </h1> <ul>"
 
     for i, d in enumerate(df['WWID']):
-        string += '<li><a href="http://localhost:5000/result/' + str(d) + '"> ' + df.iloc[i].Last_Name +\
+        string += '''<li><a href="{{ url_for('result', name = ''' + str(d) + ') }}"> ' + df.iloc[i].Last_Name +\
                   ', ' + df.iloc[i].First_Name + '</a></li>\n'
 
     string += '''

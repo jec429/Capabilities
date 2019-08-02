@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+   <body>
+
+      <h1>
+      <button onclick="goBack()">Go Back</button>
+         <script>
+            function goBack() {
+               window.history.back();
+            }
+         </script>
+      </h1>
+      <table border = 1>
+         {% for key, value in result.items() %}
+            <tr>
+               {% if 'Responsibilities and Achievements' in key or 'Company' in key
+                  or 'Education' in key or 'Field of Study' in key or 'Job Title' in key
+                  or 'Highest Degree Received' in key
+               %}
+                  <th> {{ key }} </th>
+                  <td>
+                     {% for para in value[0] %}
+                        {% if para|string|length < 4 %}
+                           {% set cleaned1 = para|replace('nan', 'Not Available') %}
+                        {% else %}
+                           {% set cleaned1 = para %}
+                        {% endif %}
+                        {% set cleaned2 = cleaned1|replace('•	', '') %}
+                        {% set cleaned3 = cleaned2|replace('- ', '') %}
+                        {% set cleaned4 = cleaned3|replace('• ', '') %}
+                        <p>{{ loop.index ~'. ' ~ cleaned4 }}</p>
+                     {% endfor %}
+                  </td>
+               {% else %}
+                  <th> {{ key }} </th>
+                  <td> {{ value[0] }} </td>
+               {% endif %}
+            </tr>
+         {% endfor %}
+      </table>
+
+   </body>
+
+</html>

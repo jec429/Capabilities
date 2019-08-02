@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+overflow: hidden;
+border: 1px solid #ccc;
+background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+background-color: inherit;
+float: left;
+border: none;
+outline: none;
+cursor: pointer;
+padding: 14px 16px;
+transition: 0.3s;
+font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+display: none;
+padding: 6px 12px;
+border: 1px solid #ccc;
+border-top: none;
+}
+
+* {
+box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+float: left;
+width: 50%;
+padding: 10px;
+height: 400px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+</style>
+</head>
+<body>
+
+
+
+<img src="../static/JohnsonandJohnsonLogo.png" alt="J&J Logo" width="500" height="100">
+
+<form action = "http://localhost:5000/search" method = "post">
+
+        <h2 style="font-family:verdana; font-size:160%;">Filters:</h2>
+        <div class="column">
+
+            <p>Capability 1</p>
+            <select name="capability1">
+                <option value="Modeling">Modeling</option>
+                <option value="Analytics">Analytics</option>
+                <option value="Programming">Programming</option>
+                <option value="Statistics">Statistics</option>
+                <option value="Insights">Insights</option>
+            </select>
+
+            <input type="range" name="cap1" min="0" max="10" value="0" step="1" oninput="this.form.amountCap1.value=this.value" />
+            <input type="number" name="amountCap1" min="0" max="10" value="0" oninput="this.form.cap1.value=this.value" />
+
+            <p>Capability 3</p>
+            <select name="capability3">
+                <option value="Modeling">Modeling</option>
+                <option value="Analytics">Analytics</option>
+                <option value="Programming">Programming</option>
+                <option value="Statistics">Statistics</option>
+                <option value="Insights">Insights</option>
+            </select>
+
+            <input type="range" name="cap3" min="0" max="10" value="0" step="1" oninput="this.form.amountCap3.value=this.value" />
+            <input type="number" name="amountCap3" min="0" max="10" value="0" oninput="this.form.cap3.value=this.value" />
+
+            <p>Capability 5</p>
+            <select name="capability5">
+                <option value="Modeling">Modeling</option>
+                <option value="Analytics">Analytics</option>
+                <option value="Programming">Programming</option>
+                <option value="Statistics">Statistics</option>
+                <option value="Insights">Insights</option>
+            </select>
+
+            <input type="range" name="cap5" min="0" max="10" value="0" step="1" oninput="this.form.amountCap5.value=this.value" />
+            <input type="number" name="amountCap5" min="0" max="10" value="0" oninput="this.form.cap5.value=this.value" />
+
+            <p><input type = "submit" value = "submit" /></p>
+
+
+        </div>
+        <div class="column">
+
+            <p>Capability 2</p>
+            <select name="capability2">
+                <option value="Modeling">Modeling</option>
+                <option value="Analytics">Analytics</option>
+                <option value="Programming">Programming</option>
+                <option value="Statistics">Statistics</option>
+                <option value="Insights">Insights</option>
+            </select>
+            <input type="range" name="cap2" min="0" max="10" value="0" step="1" oninput="this.form.amountCap2.value=this.value" />
+            <input type="number" name="amountCap2" min="0" max="10" value="0" oninput="this.form.cap2.value=this.value" />
+
+            <p>Capability 4</p>
+            <select name="capability4">
+                <option value="Modeling">Modeling</option>
+                <option value="Analytics">Analytics</option>
+                <option value="Programming">Programming</option>
+                <option value="Statistics">Statistics</option>
+                <option value="Insights">Insights</option>
+            </select>
+
+            <input type="range" name="cap4" min="0" max="10" value="0" step="1" oninput="this.form.amountCap4.value=this.value" />
+            <input type="number" name="amountCap4" min="0" max="10" value="0" oninput="this.form.cap4.value=this.value" />
+
+
+        </div>
+
+
+
+
+
+</form>
+
+<script>
+function openTab(evt, tabName) {
+var i, tabcontent, tablinks;
+tabcontent = document.getElementsByClassName("tabcontent");
+for (i = 0; i < tabcontent.length; i++) {
+tabcontent[i].style.display = "none";
+}
+tablinks = document.getElementsByClassName("tablinks");
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" active", "");
+}
+document.getElementById(tabName).style.display = "block";
+evt.currentTarget.className += " active";
+}
+</script>
+
+<script>
+
+var values = [0, 10, 11, 20, 21, 22, 23, 24, 25, 26, 30, 31, 40, 41, 50, 51, 52, 53, 60, 61, 70, 71, 72, 80];
+
+var rangesliderMin = document.getElementById("sliderRangeMin");
+var outputMin = document.getElementById("demoMin");
+outputMin.innerHTML = values[rangesliderMin.value];
+
+rangesliderMin.oninput = function() {
+  outputMin.innerHTML = values[this.value];
+}
+
+var rangeslider = document.getElementById("sliderRange");
+var output = document.getElementById("demo");
+output.innerHTML = values[rangeslider.value];
+
+rangeslider.oninput = function() {
+  output.innerHTML = values[this.value];
+}
+
+</script>
+
+</body>
+</html>

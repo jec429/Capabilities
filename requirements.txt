@@ -1,0 +1,6 @@
+Flask
+Werkzeug
+pandas
+nltk
+sklearn
+flask_login

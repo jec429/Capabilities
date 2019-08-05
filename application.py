@@ -1,10 +1,5 @@
-import numpy as np
-from flask import Flask, redirect, url_for, render_template, request, Response, abort
-from flask_login import LoginManager, login_required, login_user, logout_user
-from sklearn.metrics.pairwise import cosine_similarity
+from flask import Flask, redirect, url_for, render_template, request
 from utils import *
-import time
-from flask import stream_with_context
 
 
 application = Flask(__name__)
@@ -53,7 +48,7 @@ def cap_search(argus):
     cap4 = int(cap4)
     cap5 = int(cap5)
 
-    all_docs = pd.read_pickle("./fake_data_scientists.pkl")
+    all_docs = pd.read_pickle("static/fake_data_scientists.pkl")
 
     df = all_docs[(all_docs[capa1] >= cap1) &
                   (all_docs[capa2] >= cap2) &
@@ -74,7 +69,7 @@ def cap_search(argus):
 
 @application.route('/result/<int:name>')
 def result(name):
-    all_docs = pd.read_pickle("./fake_data_scientists.pkl")
+    all_docs = pd.read_pickle("static/fake_data_scientists.pkl")
     df = all_docs[all_docs['WWID']==name]
     if df.shape[0] == 0:
         return "<a href='{{ url_for('home') }}'>Home</a> <html><body><h1>No WWID found!</h1><h1><button onclick='goBack()'>Go Back</button><script>function \

@@ -17,7 +17,7 @@ class ListConverter(BaseConverter):
 
 def generate_fake_file():
     df = pd.DataFrame()
-    df_ds = pd.read_csv('../data_scientists/clean_updated_data_June2.csv', delimiter=',')
+    df_ds = pd.read_csv('../clean_updated_data_June2.csv', delimiter=',')
     positions = list(df_ds[df_ds['FLAG']==True]['Position'].values)
     pos = [x.split('-')[0].upper() for x in positions]
     wwids = []
@@ -67,8 +67,8 @@ def generate_fake_file():
 
     df.info()
     print(df.head(10))
-    df.to_pickle('fake_data_scientists.pkl')
-    df.to_csv('fake_data_scientists.csv', sep=',', encoding='utf-8')
+    df.to_pickle('static/fake_data_scientists.pkl')
+    df.to_csv('static/fake_data_scientists.csv', sep=',', encoding='utf-8')
 
 
 def write_html(df):

@@ -234,3 +234,19 @@ def write_table(df):
     </html>
     '''
     return string
+
+
+def calculate_proficiency():
+    import json
+    df_ds = pd.read_excel('./DataAnalyticsEEs-Updated.3.xlsx', sheet_name='wwid')
+    with open('capability.json') as json_file:
+        data = json.load(json_file)
+
+    analytics = data['analytics'] + [['analytics', 1.0]]
+    prof_anas = []
+    for ed, id, eq, iq in zip(df_ds['Ext Desc'], df_ds['Int Desc'], df_ds['Ext Qual'], df_ds['Int Qual']):
+        prof_ana = 0
+        for a in analytics:
+            prof_ana += ed.count(a[0])*a[1]
+        prof_anas.append(prof_ana)
+    print(prof_anas)

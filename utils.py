@@ -238,15 +238,35 @@ def write_table(df):
 
 def calculate_proficiency():
     import json
-    df_ds = pd.read_excel('./DataAnalyticsEEs-Updated.3.xlsx', sheet_name='wwid')
-    with open('capability.json') as json_file:
+    import operator
+
+    df_ds = pd.read_excel(r'C:\Users\jchaves6\PycharmProjects\Capabilities\DataAnalyticsEEs-Updated.3.xlsx',
+                          sheet_name='Email')
+
+    print(df_ds.head())
+
+    df_ds.drop_duplicates(subset="WWID", keep='first', inplace=True)
+
+    print(df_ds.head())
+    with open(r'C:\Users\jchaves6\PycharmProjects\Capabilities\capability.json') as json_file:
         data = json.load(json_file)
+
+    profs = {}
 
     analytics = data['analytics'] + [['analytics', 1.0]]
     prof_anas = []
-    for ed, id, eq, iq in zip(df_ds['Ext Desc'], df_ds['Int Desc'], df_ds['Ext Qual'], df_ds['Int Qual']):
+    df_ds = df_ds.replace(np.nan, '')
+    for w, ed, ind, eq, inq in zip(df_ds['WWID'], df_ds['Ext Desc'], df_ds['Int Desc'], df_ds['Ext Qual'], df_ds['Int Qual']):
         prof_ana = 0
         for a in analytics:
-            prof_ana += ed.count(a[0])*a[1]
+            # print(ed)
+            prof_ana += ed.count(a[0])*a[1]*.09
+            prof_ana += ind.count(a[0]) * a[1]*0.9
+            prof_ana += eq.count(a[0]) * a[1]*1.1
+            prof_ana += inq.count(a[0]) * a[1]*1.1
         prof_anas.append(prof_ana)
-    print(prof_anas)
+        profs[w] = prof_ana
+
+    sorted_profs = sorted(profs.items(), key=operator.itemgetter(1), reverse=True)
+
+    print(sorted_profs)
